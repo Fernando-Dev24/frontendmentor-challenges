@@ -1,0 +1,5 @@
+Fonts to use:
+
+1. Serif: Merriweather
+2. Sans-Serif: Poppins
+3. Monospace: Ubuntu Mono
