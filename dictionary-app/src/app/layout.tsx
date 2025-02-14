@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 
-/* assets */
-import "./globals.css";
+import { Provider } from "@/providers";
 import { Navbar } from "@/components";
-import { FontProvider } from "@/providers";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Dictionary App",
-  description: "Search for your favorite words and its meaning 😎",
+  description: "Search for your favorite words and its meaning",
 };
 
 export default function RootLayout({
@@ -17,10 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <FontProvider>
+      <Provider>
         <Navbar />
         {children}
-      </FontProvider>
+      </Provider>
     </html>
   );
 }

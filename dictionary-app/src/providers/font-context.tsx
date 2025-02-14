@@ -1,18 +1,18 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { monospaceFont, sansFont, serifFont } from "@/config";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const FontContext = createContext({});
+/* context */
+const ProviderContext = createContext({});
+export const useProviderContext = () => useContext(ProviderContext);
 
-export const useFontContext = () => useContext(FontContext);
-
-export const FontProvider = ({ children }: Props) => {
-  /* STATES */
+/* provider */
+export const Provider = ({ children }: Props) => {
   const [font, setFont] = useState(serifFont);
 
   const handleFont = (font: "monospace" | "sans-serif" | "serifFont") => {
@@ -36,10 +36,10 @@ export const FontProvider = ({ children }: Props) => {
   };
 
   return (
-    <FontContext.Provider value={{ font, handleFont }}>
-      <body className={`${font.className} antialiased custom-container`}>
+    <ProviderContext.Provider value={{ font, handleFont }}>
+      <body className={`${font.className} antialiased container`}>
         {children}
       </body>
-    </FontContext.Provider>
+    </ProviderContext.Provider>
   );
 };
