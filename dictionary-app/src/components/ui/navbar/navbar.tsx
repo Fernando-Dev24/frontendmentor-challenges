@@ -1,7 +1,7 @@
+import { FontSelector } from "./font-selector";
+import { ThemeToggler } from "./theme-toggler";
 import {
   BsJournalBookmark,
-  BsToggleOff,
-  BsSun,
   // BsToggleOn,
   // BsMoon,
 } from "react-icons/bs";
@@ -16,14 +16,12 @@ export const Navbar = () => {
       {/* TOOGLE THEME */}
       <div className="flex items-center">
         {/* FONT SELECTOR */}
-        <small>Font selector</small>
+        <FontSelector />
 
+        {/* SEPARATOR */}
         <div className="mx-3">|</div>
 
-        <div className="flex items-center">
-          <BsToggleOff size={25} className="mr-3.5 cursor-pointer" />
-          <BsSun size={25} className="text-neutral-900/70" />
-        </div>
+        <ThemeToggler />
       </div>
     </nav>
   );

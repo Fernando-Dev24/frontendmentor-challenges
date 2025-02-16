@@ -1,4 +1,4 @@
-import { Merriweather, Poppins, Ubuntu_Mono } from "next/font/google";
+import { Merriweather, Poppins, Ubuntu_Mono, Borel } from "next/font/google";
 
 export const serifFont = Merriweather({
   variable: "--font-serif",
@@ -16,4 +16,10 @@ export const monospaceFont = Ubuntu_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+
+export const partOfSpeechFont = Borel({
+  variable: "--font-part-of-speech",
+  subsets: ["latin"],
+  weight: ["400"],
 });

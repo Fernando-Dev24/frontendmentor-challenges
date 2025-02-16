@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { Provider } from "@/providers";
-import { Navbar } from "@/components";
+import { Navbar, SearchBar } from "@/components";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <Provider>
         <Navbar />
+        <SearchBar />
         {children}
       </Provider>
     </html>
