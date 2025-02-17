@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { serifFont } from "@/config";
 import { NextFontWithVariable } from "next/dist/compiled/@next/font";
+import { Loader } from "@/components";
 
 interface Props {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export const useProviderContext = () => useContext(ProviderContext);
 /* provider */
 export const Provider = ({ children }: Props) => {
   const [font, setFont] = useState<NextFontWithVariable>(serifFont);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== "undefined") {
@@ -51,6 +53,10 @@ export const Provider = ({ children }: Props) => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
     if (isDark) {
       document.documentElement.classList.remove("light");
       document.documentElement.classList.add("dark");
@@ -61,6 +67,10 @@ export const Provider = ({ children }: Props) => {
       localStorage.setItem("theme", "light");
     }
   }, [isDark]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <ProviderContext.Provider
