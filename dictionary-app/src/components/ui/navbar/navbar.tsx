@@ -10,7 +10,10 @@ export const Navbar = () => {
   return (
     <nav className="py-5 flex justify-between items-center">
       <figure about="logo">
-        <BsJournalBookmark size={25} className="text-neutral-900/50" />
+        <BsJournalBookmark
+          size={25}
+          className="text-neutral-900/50 dark:text-white"
+        />
       </figure>
 
       {/* TOOGLE THEME */}
