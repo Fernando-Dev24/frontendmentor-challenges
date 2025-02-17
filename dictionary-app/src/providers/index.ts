@@ -1,1 +1,1 @@
-export * from "./font-context";
+export * from "./provider";

@@ -16,11 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Provider>
-        <Navbar />
-        <SearchBar />
-        {children}
-      </Provider>
+      <body className="bg-[#fff] text-[#171717] dark:bg-[#0a0a0a] dark:text-[#ededed] transition-colors duration-300">
+        <Provider>
+          <Navbar />
+          <SearchBar />
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 }
