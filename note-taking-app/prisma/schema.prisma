@@ -12,3 +12,28 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// tablas
+model User {
+  id              String   @id @default(uuid())
+  username        String   @unique
+  email           String   @unique
+  password        String
+  google_oauth_id String
+  created_at      DateTime @default(now())
+  Notes           Notes[]
+}
+
+model Notes {
+  id         String   @id @default(uuid())
+  title      String
+  content    String
+  archived   Boolean
+  tags       String[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+}
