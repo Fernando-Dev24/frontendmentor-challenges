@@ -15,7 +15,8 @@ This project is a **collaborative real-time note-taking application** built with
 2. Clone `.template.env` file, rename it with `.env`, and replace variables with yours.
 3. Install dependencies `npm install`
 4. Run postgress daemonized on Docker `docker compose up -d`
-5. Execute dev script `npm run dev`
+5. Execute `npx prisma migrate dev`
+6. Execute dev script `npm run dev`
 
 ### Database Setup
 
