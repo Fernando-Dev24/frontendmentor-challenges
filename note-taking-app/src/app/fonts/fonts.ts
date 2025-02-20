@@ -1,4 +1,4 @@
-import { Kumbh_Sans, Montserrat_Alternates } from "next/font/google";
+import { Kumbh_Sans, Pacifico } from "next/font/google";
 
 export const kumbhSans = Kumbh_Sans({
   subsets: ["latin"],
@@ -6,8 +6,8 @@ export const kumbhSans = Kumbh_Sans({
   variable: "--font-kumbh-sans",
 });
 
-export const montserratAlternates = Montserrat_Alternates({
+export const titleFont = Pacifico({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-montserrat-alternates",
+  weight: ["400"],
+  variable: "--font-pacifico",
 });

@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Title } from "@/components";
+import { Logo } from "@/components";
 
 import {
   IoHomeOutline,
@@ -7,6 +6,10 @@ import {
   IoChevronForward,
   IoPricetagOutline,
 } from "react-icons/io5";
+
+interface Props {
+  className: React.HTMLAttributes<HTMLElement>["className"];
+}
 
 const tags = [
   { name: "cooking" },
@@ -21,20 +24,13 @@ const tags = [
   { name: "typescript" },
 ];
 
-export const Sidebar = () => {
+export const Sidebar = ({ className }: Props) => {
   return (
-    <aside className="fixed top-0 left-0 w-[300px] h-screen p-5 border-r border-gray-300 overflow-y-auto scrollbar">
+    <aside
+      className={`${className} fixed top-0 left-0 w-[300px] h-screen p-5 border-r border-gray-200 overflow-y-auto scrollbar`}
+    >
       {/* LOGO */}
-      <div className="flex items-center mb-8">
-        <Image
-          src={"/logo/logo.svg"}
-          alt="logo"
-          width={50}
-          height={50}
-          className="mr-5"
-        />
-        <Title title="Notes" />
-      </div>
+      <Logo />
 
       {/* NOTES OPTIONS */}
       <div className="pb-5 border-b border-b-gray-200">

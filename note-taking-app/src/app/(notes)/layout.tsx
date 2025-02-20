@@ -1,4 +1,11 @@
-import { Sidebar, Navbar } from "@/components";
+import {
+  Sidebar,
+  Navbar,
+  NavbarMobile,
+  BottomSidebarMobile,
+} from "@/components";
+import { Provider } from "@/provider/provider";
+import { SearchModal } from "../../components/modals/search-modal";
 
 export default function NotesLayout({
   children,
@@ -6,12 +13,15 @@ export default function NotesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <Sidebar />
-      <div className="w-[calc(100%-300px)] ml-[300px]">
-        <Navbar />
+    <Provider>
+      <Sidebar className="hidden lg:block" />
+      <div className="lg:w-[calc(100%-300px)] lg:ml-[300px]">
+        <Navbar className="hidden lg:flex" />
+        <NavbarMobile className="lg:hidden" />
         {children}
+        <BottomSidebarMobile className="lg:hidden" />
       </div>
-    </section>
+      <SearchModal id={"search_modal"} />
+    </Provider>
   );
 }

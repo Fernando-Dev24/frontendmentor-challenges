@@ -1,4 +1,4 @@
-import { montserratAlternates } from "@/app/fonts";
+import { titleFont } from "@/app/fonts";
 
 interface TitleProps {
   title: string;
@@ -6,9 +6,7 @@ interface TitleProps {
 
 export const Title = ({ title }: TitleProps) => {
   return (
-    <h2
-      className={`${montserratAlternates.className} text-2xl font-medium antialiased`}
-    >
+    <h2 className={`${titleFont.className} text-2xl font-medium antialiased`}>
       {title}
     </h2>
   );
