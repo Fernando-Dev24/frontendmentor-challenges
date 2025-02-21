@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logo } from "@/components";
 
 import {
@@ -6,10 +10,26 @@ import {
   IoChevronForward,
   IoPricetagOutline,
 } from "react-icons/io5";
+import clsx from "clsx";
 
 interface Props {
   className: React.HTMLAttributes<HTMLElement>["className"];
 }
+
+const mainPagesLinks = [
+  {
+    path: "/all",
+    label: "All Notes",
+    icon: <IoHomeOutline size={20} className="icon" />,
+    icon_chevron: <IoChevronForward size={20} />,
+  },
+  {
+    path: "/archived",
+    label: "Archived Notes",
+    icon: <IoArchiveOutline size={20} className="icon" />,
+    icon_chevron: <IoChevronForward size={20} />,
+  },
+];
 
 const tags = [
   { name: "cooking" },
@@ -25,6 +45,8 @@ const tags = [
 ];
 
 export const Sidebar = ({ className }: Props) => {
+  const pathname = usePathname();
+
   return (
     <aside
       className={`${className} fixed top-0 left-0 w-[300px] h-screen p-5 border-r border-gray-200 overflow-y-auto scrollbar`}
@@ -34,23 +56,25 @@ export const Sidebar = ({ className }: Props) => {
 
       {/* NOTES OPTIONS */}
       <div className="pb-5 border-b border-b-gray-200">
-        <button className="btn active w-full flex justify-between items-center mb-3">
-          <div className="flex items-center">
-            <IoHomeOutline size={20} className="icon mr-2" />
-            All Notes
-          </div>
+        {mainPagesLinks.map((link) => (
+          <Link
+            key={link.path}
+            href={link.path}
+            className={clsx(
+              "btn w-full flex justify-between items-center mb-3",
+              {
+                active: pathname === link.path,
+              }
+            )}
+          >
+            <div className="flex items-center">
+              {link.icon}
+              {link.label}
+            </div>
 
-          <IoChevronForward size={20} />
-        </button>
-
-        <button className="btn w-full flex justify-between items-center">
-          <div className="flex items-center">
-            <IoArchiveOutline size={20} className="icon mr-2" />
-            Archived Notes
-          </div>
-
-          <IoChevronForward size={20} />
-        </button>
+            {link.icon_chevron}
+          </Link>
+        ))}
       </div>
 
       {/* TAGS */}
@@ -62,7 +86,7 @@ export const Sidebar = ({ className }: Props) => {
             key={tag.name}
             className="btn w-full flex items-center mb-3 capitalize"
           >
-            <IoPricetagOutline size={20} className="icon mr-2" />
+            <IoPricetagOutline size={20} className="icon" />
             {tag.name}
           </button>
         ))}

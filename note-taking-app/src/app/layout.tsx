@@ -15,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${kumbhSans.className} antialiased`}>{children}</body>
+      <body className={`${kumbhSans.className} antialiased scrollbar`}>
+        {children}
+      </body>
     </html>
   );
 }

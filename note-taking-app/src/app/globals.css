@@ -64,6 +64,10 @@ button {
   }
 }
 
+.btn .icon {
+  @apply mr-2;
+}
+
 /* SCROLLBAR */
 @layer utilities {
   .scrollbar::-webkit-scrollbar {

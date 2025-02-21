@@ -1,3 +1,5 @@
-export default function NotesPage() {
-  return <div></div>;
+import { redirect } from "next/navigation";
+
+export default function HomePage() {
+  redirect("/all");
 }

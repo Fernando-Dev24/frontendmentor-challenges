@@ -1,3 +1,3 @@
-export default function AllNotesPage() {
+export default function ArchivedNotesPage() {
   return <div className="hidden lg:block" />;
 }

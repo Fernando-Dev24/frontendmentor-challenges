@@ -16,7 +16,12 @@ export * from "./ui/navbar/navbar-mobile";
 export * from "./logo/logo";
 
 /* MODALS */
+export * from "./modals/tags-modal";
 export * from "./modals/search-modal";
+export * from "./modals/btn-close-modal";
 
 /* FORMS */
 export * from "./form/search-note-form";
+
+/* NOTES */
+export * from "./notes/notes";

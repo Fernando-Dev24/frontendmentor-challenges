@@ -14,7 +14,7 @@ export const SearchNoteForm = () => {
           type="text"
           id="search"
           placeholder="Search by title, content, or tags..."
-          className="w-full lg:w-[500px] py-3 px-5 pl-10 border border-gray-300 rounded-md outline-none focus:shadow-sm text-base md:text-lg focus:border-gray-400 transition-all duration-150"
+          className="w-full lg:w-[400px] py-3 px-5 pl-10 border border-gray-300 rounded-md outline-none focus:shadow-sm text-base md:text-lg focus:border-gray-400 transition-all duration-150"
         />
         <IoSearchOutline
           size={20}

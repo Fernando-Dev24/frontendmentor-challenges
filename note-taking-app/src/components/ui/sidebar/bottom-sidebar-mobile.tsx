@@ -57,7 +57,7 @@ export const BottomSidebarMobile = ({ className }: Props) => {
 
   return (
     <aside
-      className={`${className} fixed bottom-0 left-0 w-full border-t border-gray-100`}
+      className={`${className} fixed bottom-0 left-0 w-full bg-white border-t border-gray-200`}
     >
       <div className={`flex justify-center items-center`}>
         {buttons.map((button) => (
@@ -67,7 +67,9 @@ export const BottomSidebarMobile = ({ className }: Props) => {
               className="flex flex-col items-center justify-start w-full py-5 text-center capitalize text-sm border-x border-gray-50 hover:bg-gray-50 transition-colors duration-150"
             >
               {button.icon}
-              <span className="hidden sm:inline-block">{button.label}</span>
+              <span className="hidden sm:inline-block sm:pt-3">
+                {button.label}
+              </span>
             </button>
           </div>
         ))}

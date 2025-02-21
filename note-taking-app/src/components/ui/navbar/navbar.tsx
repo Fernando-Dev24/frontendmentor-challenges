@@ -1,18 +1,25 @@
+"use client";
+
 import { IoSettingsOutline } from "react-icons/io5";
 import { SearchNoteForm } from "../../form/search-note-form";
+import { usePathname } from "next/navigation";
 
 interface Props {
   className: React.HTMLAttributes<HTMLElement>["className"];
 }
 
 export const Navbar = ({ className }: Props) => {
+  const pathname = usePathname();
+
   return (
     <nav
       className={`${className} justify-between items-center py-10 px-10 border-b border-gray-200`}
     >
       {/* TITLE */}
       <div>
-        <h1 className="text-4xl font-medium">All Notes</h1>
+        <h1 className="text-3xl font-medium capitalize">
+          {pathname.split("/").at(-1)} Notes
+        </h1>
       </div>
 
       <div className="flex items-center">
