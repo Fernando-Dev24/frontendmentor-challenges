@@ -7,7 +7,6 @@ import {
   TagsModal,
 } from "@/components";
 import { Provider } from "@/provider/provider";
-import { Notes } from "../../components/notes/notes";
 import React from "react";
 
 interface Props {
@@ -21,11 +20,7 @@ export default function NotesLayout({ children }: Props) {
       <div className="lg:w-[calc(100%-300px)] lg:ml-[300px]">
         <Navbar className="hidden lg:flex" />
         <NavbarMobile className="lg:hidden" />
-        <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr]">
-          <Notes />
-          {children}
-        </div>
-
+        {children}
         <BottomSidebarMobile className="lg:hidden" />
       </div>
       <TagsModal id={"tags_modal"} />

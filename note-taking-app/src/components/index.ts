@@ -25,3 +25,7 @@ export * from "./form/search-note-form";
 
 /* NOTES */
 export * from "./notes/notes";
+
+/* EDITOR */
+export * from "./editor/editor";
+export * from "./editor/editor-nav";

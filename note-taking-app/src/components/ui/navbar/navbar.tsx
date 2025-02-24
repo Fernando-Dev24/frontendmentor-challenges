@@ -10,6 +10,9 @@ interface Props {
 
 export const Navbar = ({ className }: Props) => {
   const pathname = usePathname();
+  const renderPathname = pathname.includes("edit")
+    ? pathname.split("/").at(-2)
+    : pathname.split("/").at(-1);
 
   return (
     <nav
@@ -17,9 +20,7 @@ export const Navbar = ({ className }: Props) => {
     >
       {/* TITLE */}
       <div>
-        <h1 className="text-3xl font-medium capitalize">
-          {pathname.split("/").at(-1)} Notes
-        </h1>
+        <h1 className="text-3xl font-medium capitalize">{renderPathname}</h1>
       </div>
 
       <div className="flex items-center">

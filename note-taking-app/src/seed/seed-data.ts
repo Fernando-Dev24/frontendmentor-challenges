@@ -17,7 +17,7 @@ export const seedData: SeedData = {
   notes: [
     {
       id: "1",
-      title: "React Permonce Optimization",
+      title: "React Performance Optimization",
       archived: false,
       content:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
