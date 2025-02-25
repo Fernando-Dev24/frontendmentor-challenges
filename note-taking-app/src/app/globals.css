@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "flowbite-typography";
 
 :root {
   --background: #ffffff;
@@ -104,4 +105,10 @@ button {
 .modal-background {
   @apply w-full fixed bottom-0 left-0 right-0 top-0 z-[999] bg-black/70;
   /* backdrop-filter: blur(1px); */
+}
+
+/* EDITOR */
+textarea {
+  @apply resize-none max-w-full w-full;
+  field-sizing: content;
 }

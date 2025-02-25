@@ -10,11 +10,23 @@
     "seed": "ts-node ./src/seed/seed.ts"
   },
   "dependencies": {
-    "@lexical/react": "^0.25.0",
     "@prisma/client": "^6.4.0",
+    "@tiptap/core": "^2.11.5",
+    "@tiptap/extension-bold": "^2.11.5",
+    "@tiptap/extension-color": "^2.11.5",
+    "@tiptap/extension-font-family": "^2.11.5",
+    "@tiptap/extension-highlight": "^2.11.5",
+    "@tiptap/extension-subscript": "^2.11.5",
+    "@tiptap/extension-superscript": "^2.11.5",
+    "@tiptap/extension-text-style": "^2.11.5",
+    "@tiptap/extension-underline": "^2.11.5",
+    "@tiptap/pm": "^2.11.5",
+    "@tiptap/starter-kit": "^2.11.5",
     "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
-    "lexical": "^0.25.0",
+    "flowbite": "^3.1.2",
+    "flowbite-react": "^0.10.2",
+    "flowbite-typography": "^1.0.5",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -36,5 +48,8 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "overrides": {
+    "prosemirror-model": "1.19.3"
   }
 }

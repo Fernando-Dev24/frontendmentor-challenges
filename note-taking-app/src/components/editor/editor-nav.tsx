@@ -16,7 +16,10 @@ export const EditorNav = () => {
 
   return (
     <nav className="flex justify-between items-center mb-5 pb-3 border-b border-gray-200">
-      <button onClick={goBack} className="flex items-center text-blue-600">
+      <button
+        onClick={goBack}
+        className="flex items-center text-blue-600 hover:text-blue-500"
+      >
         <IoChevronBackOutline size={20} />
         Go Back
       </button>
