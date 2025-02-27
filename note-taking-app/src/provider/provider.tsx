@@ -10,7 +10,8 @@ import {
 } from "react";
 import { Loader } from "@/components";
 import { useModalStore } from "@/store/modals/modals-store";
-import { ModalsState } from "@/interfaces";
+import { useEditorStore } from "@/store/editor/editor-store";
+import { EditorState, ModalsState } from "@/interfaces";
 
 interface Props {
   children: ReactNode;
@@ -18,6 +19,7 @@ interface Props {
 
 interface ContextType {
   modalsState: ModalsState;
+  editorState: EditorState;
   appEl: RefObject<HTMLElement | null>;
 }
 
@@ -25,6 +27,7 @@ export const Context = createContext({} as ContextType);
 
 export const Provider = ({ children }: Props) => {
   const modalsState = useModalStore((state) => state);
+  const editorState = useEditorStore((state) => state);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -42,6 +45,7 @@ export const Provider = ({ children }: Props) => {
     <Context.Provider
       value={{
         modalsState,
+        editorState,
         appEl,
       }}
     >

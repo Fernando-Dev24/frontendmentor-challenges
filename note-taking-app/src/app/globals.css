@@ -107,8 +107,14 @@ button {
   /* backdrop-filter: blur(1px); */
 }
 
-/* EDITOR */
-textarea {
-  @apply resize-none max-w-full w-full;
-  field-sizing: content;
+/* TIP TAP EDITOR */
+.tiptap {
+  @apply !outline-none;
+}
+
+button.editor-toolbar-btn {
+  @apply p-2.5 rounded hover:bg-neutral-700;
+  &.active {
+    @apply text-white bg-neutral-700;
+  }
 }
