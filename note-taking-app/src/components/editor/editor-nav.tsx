@@ -1,5 +1,6 @@
 "use client";
 
+import { useProvider } from "@/hooks";
 import { useRouter } from "next/navigation";
 import {
   IoArchiveOutline,
@@ -9,9 +10,16 @@ import {
 
 export const EditorNav = () => {
   const router = useRouter();
+  const {
+    editorState: { content },
+  } = useProvider();
 
   const goBack = () => {
     router.back();
+  };
+
+  const onSaveNote = () => {
+    console.log({ content });
   };
 
   return (
@@ -37,7 +45,10 @@ export const EditorNav = () => {
           Cancel
         </button>
 
-        <button className="py-1 px-2 rounded-md bg-blue-600 text-white hover:bg-blue-500">
+        <button
+          onClick={onSaveNote}
+          className="py-1 px-2 rounded-md bg-blue-600 text-white hover:bg-blue-500"
+        >
           Save Note
         </button>
       </div>

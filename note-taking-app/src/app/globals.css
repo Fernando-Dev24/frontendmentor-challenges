@@ -115,6 +115,6 @@ button {
 button.editor-toolbar-btn {
   @apply p-2.5 rounded hover:bg-neutral-700;
   &.active {
-    @apply text-white bg-neutral-700;
+    @apply text-white;
   }
 }

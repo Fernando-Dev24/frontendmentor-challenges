@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Tooltip } from "react-tooltip";
 import { useProvider } from "@/hooks";
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
@@ -18,15 +19,76 @@ import {
   FaStrikethrough,
   FaUnderline,
 } from "react-icons/fa6";
+import { KeyFormatStates } from "@/interfaces";
+import clsx from "clsx";
 
 /* VARIABLES */
 const iconSize = 20;
+const buttons = [
+  {
+    id: "bold",
+    data_tooltip_content: "Bold",
+    className: "editor-toolbar-btn",
+    icon: <FaBold size={iconSize} />,
+  },
+  {
+    id: "italic",
+    data_tooltip_content: "Italic",
+    className: "editor-toolbar-btn",
+    icon: <FaItalic size={iconSize} />,
+  },
+  {
+    id: "underline",
+    data_tooltip_content: "Underline",
+    className: "editor-toolbar-btn",
+    icon: <FaUnderline size={iconSize} />,
+  },
+  {
+    id: "strike",
+    data_tooltip_content: "Strike Through",
+    className: "editor-toolbar-btn",
+    icon: <FaStrikethrough size={iconSize} />,
+  },
+  {
+    id: "left",
+    data_tooltip_content: "Text left",
+    className: "editor-toolbar-btn",
+    icon: <FaAlignLeft size={iconSize} />,
+  },
+  {
+    id: "center",
+    data_tooltip_content: "Text center",
+    className: "editor-toolbar-btn",
+    icon: <FaAlignCenter size={iconSize} />,
+  },
+  {
+    id: "right",
+    data_tooltip_content: "Text right",
+    className: "editor-toolbar-btn",
+    icon: <FaAlignRight size={iconSize} />,
+  },
+];
 
 export const NoteEditor = () => {
   const editorElRef = useRef<HTMLDivElement>(null);
 
   const { editorState } = useProvider();
-  const { setEditor, destroyEditor } = editorState;
+  const {
+    editor,
+    formatStates,
+    setEditor,
+    setFormatState,
+    setEditorContent,
+    destroyEditor,
+  } = editorState;
+
+  /* STATES */
+  const [isEditorEmpty, setIsEditorEmpty] = useState(editor?.isEmpty ?? true);
+
+  /* FUNCTION */
+  const dispatchFormat = (id: KeyFormatStates) => {
+    setFormatState(id);
+  };
 
   useEffect(() => {
     if (!editorElRef.current) return;
@@ -39,9 +101,9 @@ export const NoteEditor = () => {
         Underline,
         TextStyle,
         TextAlign.configure({
-          types: ["paragraph"],
+          types: ["heading", "paragraph"],
           alignments: ["left", "center", "right"],
-          defaultAlignment: "right",
+          defaultAlignment: "left",
         }),
       ],
       content: ``,
@@ -51,151 +113,60 @@ export const NoteEditor = () => {
             "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none",
         },
       },
+      onUpdate: ({ editor }) => {
+        setEditorContent(editor.getJSON());
+        setIsEditorEmpty(editor.isEmpty);
+      },
     });
 
     // Set editor
     setEditor(newEditor);
 
-    // todo: Event Listeners para los botones
-    /* const setupEventListeners = () => {
-      document
-        .getElementById("toggle-bold")
-        ?.addEventListener("click", () =>
-          editor.chain().focus().toggleBold().run()
-        );
-      document
-        .getElementById("toggle-italic")
-        ?.addEventListener("click", () =>
-          editor?.chain().focus().toggleItalic().run()
-        );
-      document
-        .getElementById("toggle-underline")
-        ?.addEventListener("click", () =>
-          editor.chain().focus().toggleUnderline().run()
-        );
-      document
-        .getElementById("toggle-strike")
-        ?.addEventListener("click", () =>
-          editor.chain().focus().toggleStrike().run()
-        );
-      document
-        .getElementById("format-text-left")
-        ?.addEventListener("click", () =>
-          editor.chain().focus().setTextAlign("left").run()
-        );
-      document
-        .getElementById("format-text-center")
-        ?.addEventListener("click", () =>
-          editor.chain().focus().setTextAlign("center").run()
-        );
-      document
-        .getElementById("format-text-right")
-        ?.addEventListener("click", () =>
-          editor.chain().focus().setTextAlign("right").run()
-        );
-    };
-
-    setupEventListeners(); */
-
     // Limpieza al desmontar
     return () => {
       destroyEditor();
     };
-  }, [editorElRef, destroyEditor, setEditor]);
+  }, [editorElRef, destroyEditor, setEditor, setEditorContent]);
 
   return (
     <div className="w-full my-5">
-      {/* Toolbar */}
-
       <div className="mb-8">
         {/* BUTTONS */}
         <div className="w-fit flex justify-start items-center space-x-2 py-2 px-5 rounded-md text-gray-400 bg-neutral-800 transition-shadow duration-300 hover:shadow-lg">
-          {/* BOLD BUTTON */}
-          <button
-            id="toggle-bold"
-            data-tooltip-target="tooltip-bold"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaBold size={iconSize} />
-            <span className="sr-only">Bold</span>
-          </button>
-
-          {/* ITALIC BUTTON */}
-          <button
-            id="toggle-italic"
-            data-tooltip-target="tooltip-italic"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaItalic size={iconSize} />
-            <span className="sr-only">Italic</span>
-          </button>
-
-          {/* UNDERLINE BUTTON */}
-          <button
-            id="toggle-underline"
-            data-tooltip-target="tooltip-underline"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaUnderline size={iconSize} />
-            <span className="sr-only">Underline</span>
-          </button>
-
-          {/* STRIKE BUTTON */}
-          <button
-            id="toggle-strike"
-            data-tooltip-target="tooltip-strike"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaStrikethrough size={iconSize} />
-            <span className="sr-only">Strike</span>
-          </button>
-
-          {/* TEXT LEFT */}
-          <button
-            id="format-text-left"
-            data-tooltip-target="tooltip-strike"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaAlignLeft size={iconSize} />
-            <span className="sr-only">Strike</span>
-          </button>
-
-          {/* TEXT CENTER */}
-          <button
-            id="format-text-center"
-            data-tooltip-target="tooltip-strike"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaAlignCenter size={iconSize} />
-            <span className="sr-only">Strike</span>
-          </button>
-
-          {/* TEXT RIGHT */}
-          <button
-            id="format-text-right"
-            data-tooltip-target="tooltip-strike"
-            type="button"
-            className="editor-toolbar-btn"
-          >
-            <FaAlignRight size={iconSize} />
-            <span className="sr-only">Strike</span>
-          </button>
+          {/* RENDER BUTTONS */}
+          {buttons.map((btn) => (
+            <button
+              key={btn.id}
+              onClick={() => dispatchFormat(btn.id as KeyFormatStates)}
+              data-tooltip-content={btn.data_tooltip_content}
+              className={clsx(btn.className, {
+                active: formatStates[btn.id as KeyFormatStates],
+              })}
+              data-tooltip-id="tooltip_id"
+            >
+              {btn.icon}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* EDITOR */}
-      <div className="">
-        <label htmlFor="wysiwyg-text-example" className="">
-          Write comment
-        </label>
-        <div id="wysiwyg-text-example" ref={editorElRef} />
+      <div className="relative">
+        <div
+          id="wysiwyg-text-example"
+          ref={editorElRef}
+          className="mb-40 min-h-[400px]"
+        >
+          {isEditorEmpty && (
+            <span className="absolute top-0 left-0 text-gray-400 pointer-events-none">
+              Start writing here...
+            </span>
+          )}
+        </div>
       </div>
+
+      {/* TOOLTIP */}
+      <Tooltip id="tooltip_id" className="relative !z-50" />
     </div>
   );
 };
