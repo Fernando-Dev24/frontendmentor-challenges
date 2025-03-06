@@ -29,3 +29,4 @@ export * from "./notes/notes";
 /* EDITOR */
 export * from "./editor/editor";
 export * from "./editor/editor-nav";
+export * from "./editor/note-editor-wrapper";

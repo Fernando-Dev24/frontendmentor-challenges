@@ -1,10 +1,9 @@
-import Image from "next/image";
 import { Title } from "../ui/title/title";
 
 export const Logo = () => {
   return (
     <div className="flex items-center mb-8">
-      <Image
+      <img
         src={"/logo/logo.svg"}
         alt="logo"
         width={50}

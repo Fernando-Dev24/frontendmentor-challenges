@@ -15,8 +15,7 @@ export const useEditorStore = create<EditorState>()((set, get) => ({
   },
   content: null,
 
-  // methods
-
+  // * methods
   // Create a new instance of Editor
   setEditor: (editor: Editor) => set({ editor }),
 
@@ -25,7 +24,7 @@ export const useEditorStore = create<EditorState>()((set, get) => ({
     const state = get();
     if (!state.editor) return;
 
-    // Create a switch para saber que accion quiere ejecutar el usuario
+    // Create a switch to know which action user want to exec
     switch (id) {
       case "bold":
         state.editor.chain().focus().toggleBold().run();

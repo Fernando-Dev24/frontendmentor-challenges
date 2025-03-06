@@ -22,3 +22,7 @@ export interface EditorState {
 }
 
 export type KeyFormatStates = keyof EditorState["formatStates"];
+export type Tag = {
+  id: string;
+  name: string;
+};

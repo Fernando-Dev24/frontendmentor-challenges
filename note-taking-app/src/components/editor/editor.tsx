@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Tooltip } from "react-tooltip";
 import { useProvider } from "@/hooks";
-import { Editor } from "@tiptap/core";
+import { Editor, JSONContent } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
@@ -21,6 +21,10 @@ import {
 } from "react-icons/fa6";
 import { KeyFormatStates } from "@/interfaces";
 import clsx from "clsx";
+
+interface Props {
+  content: JSONContent | null | undefined;
+}
 
 /* VARIABLES */
 const iconSize = 20;
@@ -69,7 +73,7 @@ const buttons = [
   },
 ];
 
-export const NoteEditor = () => {
+export const NoteEditor = ({ content }: Props) => {
   const editorElRef = useRef<HTMLDivElement>(null);
 
   const { editorState } = useProvider();
@@ -106,7 +110,7 @@ export const NoteEditor = () => {
           defaultAlignment: "left",
         }),
       ],
-      content: ``,
+      content: content ?? ``,
       editorProps: {
         attributes: {
           class:
@@ -126,7 +130,7 @@ export const NoteEditor = () => {
     return () => {
       destroyEditor();
     };
-  }, [editorElRef, destroyEditor, setEditor, setEditorContent]);
+  }, [editorElRef, destroyEditor, setEditor, setEditorContent, content]);
 
   return (
     <div className="w-full my-5">
