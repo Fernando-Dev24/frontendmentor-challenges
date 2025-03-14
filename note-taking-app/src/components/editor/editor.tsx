@@ -141,6 +141,7 @@ export const NoteEditor = ({ content }: Props) => {
           {buttons.map((btn) => (
             <button
               key={btn.id}
+              type="button"
               onClick={() => dispatchFormat(btn.id as KeyFormatStates)}
               data-tooltip-content={btn.data_tooltip_content}
               className={clsx(btn.className, {

@@ -1,11 +1,14 @@
 "use client";
 
+import { logout } from "@/actions";
+import { signOut } from "next-auth/react";
 import { useProvider } from "@/hooks/useProvider";
 import { useRouter } from "next/navigation";
 
 import {
   IoArchiveOutline,
   IoHomeOutline,
+  IoLogOutOutline,
   IoPricetagsOutline,
   IoSearchOutline,
   IoSettingsOutline,
@@ -52,6 +55,14 @@ export const BottomSidebarMobile = ({ className }: Props) => {
       label: "settings",
       action: () => router.replace("/settings"),
       icon: <IoSettingsOutline size={20} />,
+    },
+    {
+      label: "log out",
+      action: () => {
+        logout();
+        signOut();
+      },
+      icon: <IoLogOutOutline size={20} />,
     },
   ];
 

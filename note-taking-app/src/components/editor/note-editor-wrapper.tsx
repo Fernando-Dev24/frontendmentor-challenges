@@ -10,8 +10,9 @@ import {
   IoTrashBinOutline,
 } from "react-icons/io5";
 import { NoteEditor } from "./editor";
-import { Note, Tag } from "@/interfaces";
-import { generateUUID } from "@/utils";
+import { Note } from "@/interfaces";
+import { formatDate } from "@/utils";
+import { useProvider } from "@/hooks";
 
 interface Props {
   note: Note | null;
@@ -19,40 +20,40 @@ interface Props {
 
 interface FormState {
   title: string;
-  tags: Tag[];
+  tags: string;
 }
 
 export const NoteEditorWrapper = ({ note }: Props) => {
   const router = useRouter();
 
-  const { register, handleSubmit, getValues, setValue } = useForm<FormState>();
+  const { register, handleSubmit, setValue, watch } = useForm<FormState>();
+  const {
+    editorState: { content },
+  } = useProvider();
+
+  watch("tags");
 
   const goBack = () => {
     router.back();
   };
 
-  const onTagStringChange = (evt: React.KeyboardEvent<HTMLInputElement>) => {
-    const value = String(getValues("tags"));
-    if (!value) return;
-    const splitedTag = value.split(" ");
-    const newTags = splitedTag.map((item) => {
-      if (item.length === 0 || item.length <= 2) return [];
-      return {
-        id: generateUUID(),
-        name: item,
-      };
-    });
-
-    console.log(newTags);
+  const onTagStringChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const tagString = evt.target.value.replace(/ /g, ",");
+    setValue("tags", tagString);
   };
 
   const onSubmit = (values: FormState) => {
-    console.log({ values });
+    console.log({ values, content });
+    // todo: validate corrects tags, title, and content
   };
 
   return (
     <>
-      <form>
+      <form
+        className="w-full"
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+      >
         {/* NAVBAR */}
         <nav className="flex justify-between items-center mb-5 pb-3 border-b border-gray-200">
           <button
@@ -78,7 +79,7 @@ export const NoteEditorWrapper = ({ note }: Props) => {
             </button>
 
             <button
-              // onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit(onSubmit)}
               type="submit"
               className="py-1 px-2 rounded-md bg-blue-600 text-white hover:bg-blue-500"
             >
@@ -90,7 +91,7 @@ export const NoteEditorWrapper = ({ note }: Props) => {
         {/* FORM TITLE */}
         <input
           placeholder="Tag Title"
-          className="mb-5 font-semibold text-3xl outline-none placeholder:font-normal placeholder:text-gray-300"
+          className="w-full mb-5 font-semibold text-3xl outline-none placeholder:font-normal placeholder:text-gray-300"
           {...register("title", { required: true })}
         />
 
@@ -106,11 +107,7 @@ export const NoteEditorWrapper = ({ note }: Props) => {
             className="outline-none border-none px-0 placeholder:text-gray-300"
             placeholder="Write tags"
             {...register("tags", { required: true })}
-            onKeyDown={(evt) => {
-              if (evt.key === " ") {
-                onTagStringChange(evt);
-              }
-            }}
+            onChange={onTagStringChange}
           />
 
           <div className="w-max flex items-center text-gray-500">
@@ -119,12 +116,12 @@ export const NoteEditorWrapper = ({ note }: Props) => {
           </div>
 
           {/* DATE */}
-          <p>{new Date().toDateString()}</p>
+          <p>{formatDate()}</p>
         </div>
-      </form>
 
-      {/* NOTE CONTENT */}
-      <NoteEditor content={note?.content} />
+        {/* NOTE CONTENT */}
+        <NoteEditor content={note?.content} />
+      </form>
     </>
   );
 };

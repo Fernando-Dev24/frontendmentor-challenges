@@ -1,3 +1,4 @@
+import { auth } from "@/auth.config";
 import {
   Sidebar,
   Navbar,
@@ -7,13 +8,17 @@ import {
   TagsModal,
 } from "@/components";
 import { Provider } from "@/provider/provider";
+import { redirect } from "next/navigation";
 import React from "react";
 
 interface Props {
   children: React.ReactNode;
 }
 
-export default function NotesLayout({ children }: Props) {
+export default async function NotesLayout({ children }: Props) {
+  const session = await auth();
+  if (!session) redirect("/auth/login");
+
   return (
     <Provider>
       <Sidebar className="hidden lg:block" />

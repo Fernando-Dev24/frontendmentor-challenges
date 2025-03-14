@@ -8,10 +8,8 @@ interface SeedData {
 export const seedData: SeedData = {
   user: {
     username: "Fernando Ortiz",
-    email: "fernando.correo@gmail.com",
-    password: "123456",
-    is_google_authenticated: false,
-    google_oauth_id: null,
+    email: "fernandodev.ortiz@gmail.com",
+    password: "R3f3R2402",
   },
 
   notes: [
@@ -19,8 +17,7 @@ export const seedData: SeedData = {
       id: "1",
       title: "React Performance Optimization",
       archived: false,
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      content: null,
       tags: ["dev", "react"],
     },
 
@@ -28,8 +25,7 @@ export const seedData: SeedData = {
       id: "2",
       title: "Japan Travel Planning",
       archived: false,
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      content: null,
       tags: ["travel", "personal"],
     },
 
@@ -37,8 +33,7 @@ export const seedData: SeedData = {
       id: "3",
       title: "Favorite Pasta Recipes",
       archived: false,
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      content: null,
       tags: ["cooking", "recipes"],
     },
 
@@ -46,8 +41,7 @@ export const seedData: SeedData = {
       id: "4",
       title: "Weekly Workout Plan",
       archived: false,
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      content: null,
       tags: ["dev", "react"],
     },
 
@@ -55,15 +49,14 @@ export const seedData: SeedData = {
       id: "5",
       title: "Meal Prep Ideas",
       archived: false,
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      content: null,
       tags: ["cooking", "health", "recipes"],
     },
 
     {
       id: "6",
       title: "Reading List",
-      content: "Buy books",
+      content: null,
       archived: false,
       tags: ["personal", "books"],
     },
