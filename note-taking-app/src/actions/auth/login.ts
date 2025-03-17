@@ -24,7 +24,7 @@ export const login = async ({ email, password }: CredentialsValues) => {
     if (error instanceof AuthError) {
       return {
         ok: false,
-        message: "CredentialsSignin",
+        message: "Your credentials are incorrect",
       };
     }
 
@@ -32,7 +32,7 @@ export const login = async ({ email, password }: CredentialsValues) => {
 
     return {
       ok: false,
-      message: "Something went wrong",
+      message: "Something went wrong, please try again in a few minutes",
     };
   }
 };

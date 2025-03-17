@@ -38,6 +38,18 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        token.data = user;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      session.user = token.data as any;
+      return session;
+    },
+
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnProtectedRoute = protectedRoutes.includes(nextUrl.pathname);

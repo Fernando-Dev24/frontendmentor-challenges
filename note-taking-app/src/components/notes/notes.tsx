@@ -8,12 +8,12 @@ interface Props {
   notes: Note[];
 }
 
-export const Notes = ({ notes }: Props) => {
+export const Notes = async ({ notes }: Props) => {
   return (
     <section className="py-10 px-5 border-r border-gray-200">
       {/* BUTTON */}
       <Link
-        href={"/new"}
+        href={"/notes/new"}
         className="w-full flex justify-center mb-10 py-3 items-center rounded-md bg-blue-600 text-white transition-colors duration-150 hover:bg-blue-700"
       >
         <IoAdd size={20} className="mr-2" />

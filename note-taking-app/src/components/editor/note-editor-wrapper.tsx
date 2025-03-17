@@ -13,6 +13,8 @@ import { NoteEditor } from "./editor";
 import { Note } from "@/interfaces";
 import { formatDate } from "@/utils";
 import { useProvider } from "@/hooks";
+import { onSaveNote } from "@/actions";
+import toast from "react-hot-toast";
 
 interface Props {
   note: Note | null;
@@ -42,9 +44,24 @@ export const NoteEditorWrapper = ({ note }: Props) => {
     setValue("tags", tagString);
   };
 
-  const onSubmit = (values: FormState) => {
-    console.log({ values, content });
-    // todo: validate corrects tags, title, and content
+  const onSubmit = async (values: FormState) => {
+    const notePromise = onSaveNote({
+      ...values,
+      content,
+      archived: note?.archived ?? false,
+      tags: values.tags.split(","),
+    });
+
+    toast.promise(notePromise, {
+      loading: "Saving note...",
+      success: <b>Note saved!</b>,
+      error: (err) => `${err}`,
+    });
+
+    const { ok } = await notePromise;
+    if (!ok) return;
+
+    router.back();
   };
 
   return (

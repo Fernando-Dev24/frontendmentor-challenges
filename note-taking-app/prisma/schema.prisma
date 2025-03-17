@@ -15,67 +15,57 @@ datasource db {
 
 // model user
 model Users {
-  id         String       @id @default(uuid())
+  id         String   @id @default(uuid())
   username   String
-  email      String       @unique
+  email      String   @unique
   password   String
-  created_at DateTime     @default(now())
-  Tags       Tags[]
-  user_notes user_notes[]
-  note_edits note_edits[]
+  created_at DateTime @default(now())
+  Notes      Notes[]
 }
 
 model Notes {
-  id         String       @id @default(uuid())
+  id         String   @id @default(uuid())
   title      String
   content    String?
-  archived   Boolean      @default(false)
-  created_at DateTime     @default(now())
-  update_at  DateTime     @updatedAt
-  user_notes user_notes[]
-  note_edits note_edits[]
-  note_tags  note_tags[]
-}
-
-model Tags {
-  id   String @id @default(uuid())
-  name String @unique
+  tags       String[]
+  archived   Boolean  @default(false)
+  created_at DateTime @default(now())
+  update_at  DateTime @updatedAt
 
   // relations
-  users     Users       @relation(fields: [user_id], references: [id])
-  user_id   String
-  note_tags note_tags[]
-}
-
-model user_notes {
-  users   Users  @relation(fields: [user_id], references: [id])
-  user_id String
-
-  notes   Notes  @relation(fields: [note_id], references: [id])
-  note_id String
-
-  @@id([user_id, note_id])
-}
-
-model note_edits {
-  id        String   @id @default(uuid())
-  update_at DateTime @updatedAt
-  diff      String?
-
-  // relations
-  notes   Notes  @relation(fields: [note_id], references: [id])
-  note_id String
-
-  users   Users  @relation(fields: [user_id], references: [id])
+  user    Users  @relation(fields: [user_id], references: [id])
   user_id String
 }
 
-model note_tags {
-  notes   Notes  @relation(fields: [note_id], references: [id])
-  note_id String
+/**
+ * model user_notes {
+ * users   Users  @relation(fields: [user_id], references: [id])
+ * user_id String
+ * notes   Notes  @relation(fields: [note_id], references: [id])
+ * note_id String
+ * @@id([user_id, note_id])
+ * }
+ */
 
-  tags   Tags   @relation(fields: [tag_id], references: [id])
-  tag_id String
+/**
+ * model note_edits {
+ * id        String   @id @default(uuid())
+ * update_at DateTime @updatedAt
+ * diff      String?
+ * // relations
+ * notes   Notes  @relation(fields: [note_id], references: [id])
+ * note_id String
+ * users   Users  @relation(fields: [user_id], references: [id])
+ * user_id String
+ * }
+ */
 
-  @@id([note_id, tag_id])
-}
+/**
+ * model note_tags {
+ * notes   Notes  @relation(fields: [note_id], references: [id])
+ * note_id String
+ * tags   Tags   @relation(fields: [tag_id], references: [id])
+ * tag_id String
+ * @@id([note_id, tag_id])
+ * }
+ */

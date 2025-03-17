@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 import { kumbhSans } from "./fonts";
 import "./globals.css";
 
@@ -16,6 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${kumbhSans.className} antialiased scrollbar`}>
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            duration: 3000,
+          }}
+        />
         {children}
       </body>
     </html>

@@ -6,4 +6,6 @@ export interface Note {
   content: JSONContent | null;
   archived: boolean;
   tags: string[];
+  created_at: Date;
+  update_at: Date;
 }
